@@ -1,0 +1,15 @@
+{
+  "name": "jas_backend",
+  "version": "1.0.0",
+  "description": "The web server for recording attendace for JAS in Obregon City, Sonora, Mex",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "web",
+    "server"
+  ],
+  "author": "Jarom Mariscal",
+  "license": "ISC"
+}
