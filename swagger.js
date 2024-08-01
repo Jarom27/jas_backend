@@ -13,6 +13,15 @@ const doc = {
             $isMember: 'n',
             $stake: 'none',
             $ward: 'none'
+        },
+        addActivity: {
+            $title: '',
+            $description: '',
+            $date: '01/08/2024',
+            $time: '09:00 AM',
+            $location: '',
+            $host: '',
+            $attendance: []
         }
     }
 };

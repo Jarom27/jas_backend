@@ -63,6 +63,9 @@
           },
           "422": {
             "description": "Unprocessable Entity"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -148,6 +151,146 @@
           },
           "422": {
             "description": "Unprocessable Entity"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/activities/": {
+      "get": {
+        "tags": [
+          "activities"
+        ],
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "activities"
+        ],
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Update an Activity.",
+            "schema": {
+              "$ref": "#/definitions/addActivity"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/activities/{id}": {
+      "get": {
+        "tags": [
+          "activities"
+        ],
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "activities"
+        ],
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Update an Activity.",
+            "schema": {
+              "$ref": "#/definitions/addActivity"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "activities"
+        ],
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -184,6 +327,49 @@
         "isMember",
         "stake",
         "ward"
+      ]
+    },
+    "addActivity": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": ""
+        },
+        "description": {
+          "type": "string",
+          "example": ""
+        },
+        "date": {
+          "type": "string",
+          "example": "01/08/2024"
+        },
+        "time": {
+          "type": "string",
+          "example": "09:00 AM"
+        },
+        "location": {
+          "type": "string",
+          "example": ""
+        },
+        "host": {
+          "type": "string",
+          "example": ""
+        },
+        "attendance": {
+          "type": "array",
+          "example": [],
+          "items": {}
+        }
+      },
+      "required": [
+        "title",
+        "description",
+        "date",
+        "time",
+        "location",
+        "host",
+        "attendance"
       ]
     }
   }
