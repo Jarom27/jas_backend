@@ -1,4 +1,5 @@
 const peopleModel = require('../models/people')
+const { validationResult } = require('express-validator')
 const getPeople = async (req, res) => {
     // #swagger.tags = ['people']
 
@@ -36,12 +37,17 @@ const addPerson = async (req, res) => {
     
     }*/
     try {
-        console.log(req.body)
+        validationResult(req).throw()
         await peopleModel.addPerson(req.body)
         res.setHeader("Content-Type", "application/json")
         res.status(201).json({ message: "The person has been created" })
     } catch (error) {
-        res.status(422).json({ errors: error.message })
+        if (error.mapped) {
+            res.status(422).json({ errors: error.mapped() })
+        }
+        else {
+            res.status(500).json({ errors: error.message })
+        }
         console.error(error)
     }
 }
@@ -54,12 +60,19 @@ const updatePerson = async (req, res) => {
     
     }*/
     try {
+        validationResult(req).throw()
         await peopleModel.updatePerson(req.body, req.params.id)
         res.setHeader("Content-Type", "application/json")
         res.status(203).json({ message: "The person has been updated" })
 
     } catch (error) {
-        res.status(422).json({ errors: error.message })
+        if (error.mapped) {
+            res.status(422).json({ errors: error.mapped() })
+        }
+        else {
+            res.status(500).json({ errors: error.message })
+        }
+
         console.error(error.message)
     }
 
@@ -67,11 +80,18 @@ const updatePerson = async (req, res) => {
 const deletePerson = async (req, res) => {
     // #swagger.tags = ['people']
     try {
+        validationResult(req).throw()
         await peopleModel.deletePerson(req.params.id)
         res.setHeader("Content-Type", "application/json")
         res.status(200).json({ message: "The person has been deleted" })
     } catch (error) {
-        res.status(422).json({ errors: error.message })
+        if (error.mapped) {
+            res.status(422).json({ errors: error.mapped() })
+        }
+        else {
+            res.status(500).json({ errors: error.message })
+        }
+
         console.error(error)
     }
 }

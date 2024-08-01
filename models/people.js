@@ -16,13 +16,13 @@ const getSingle = async (id) => {
     return results
 }
 const addPerson = async (body) => {
-    let isMember = body.isMember === "y" ? true : false
+
     const person = {
         firstname: body.firstname,
         lastname: body.lastname,
-        isMember: isMember,
-        stake: !isMember ? 'none' : body.stake,
-        ward: !isMember ? 'none' : body.ward
+        isMember: body.isMember,
+        stake: body.stake,
+        ward: body.ward
     }
 
     const collection = await mongodb.getDatabase().db().collection("people")
@@ -33,29 +33,22 @@ const addPerson = async (body) => {
 
 }
 const updatePerson = async (body, id) => {
-    if (!ObjectId.isValid(id)) {
-        throw new Error("Invalid id, please give a correct a ID")
-    }
-    let isMember = body.isMember === "y" ? true : false
     const person = {
         firstname: body.firstname,
         lastname: body.lastname,
-        isMember: isMember,
-        stake: !isMember ? 'none' : body.stake,
-        ward: !isMember ? 'none' : body.ward
+        isMember: body.isMember,
+        stake: body.stake,
+        ward: body.ward
     }
     const collection = await mongodb.getDatabase().db().collection("people")
-    const result = await collection.replaceOne({ _id: new ObjectId(id) }, person)
+    const result = await collection.replaceOne({ _id: id }, person)
     if (result.modifiedCount === 0 || result.acknowledged === false) {
         throw new Error("An error happens when inserting a new person")
     }
 }
 const deletePerson = async (id) => {
-    if (!ObjectId.isValid(id)) {
-        throw new Error("Invalid id, please give a correct id")
-    }
     const collection = await mongodb.getDatabase().db().collection("people")
-    const result = await collection.deleteOne({ _id: new ObjectId(id) })
+    const result = await collection.deleteOne({ _id: id })
     if (result.deletedCount === 0 || result.acknowledged === false) {
         throw new Error("An error happens when deleting a new person")
     }
